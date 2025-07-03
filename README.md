@@ -1,41 +1,43 @@
-# 项目名称
+<div align='center'>
+  <img src="./images/handy-n8n.svg" alt="alt text" width="100%">
+  <h1>💻 handy-n8n 🤖</h1>
+</div>
 
-*这里写项目的各类介绍信息、背景、动机等内容*
+## 项目介绍
 
-## 项目受众
+在自动化工作流日益重要的当下，n8n 凭借其强大的集成能力和灵活的配置方式，成为众多开发者和企业的
+首选工具。本课程以 “理论 + 实操” 为核心，通过系统的内容编排，带你从入门到精通 n8n，解锁自动化
+工作流的无限可能。​
 
-*注：这里写你的项目所面向的受众，本项目能给他们带来什么，对他们的基础能力要求有哪些*
+1. 多维度对比与深度解析：开篇将 n8n 与 dify 等工具进行全面对比，帮助你快速掌握 n8n 的独特优
+   势，明确其适用场景，为后续学习奠定基础。​
+2. 全场景部署教学：覆盖多种部署模式，无论你处于何种技术环境，都能轻松完成 n8n 部署，开启 n8n 之旅
+3. 系统化知识体系：从界面操作、节点功能（Trigger、控制流、数据处理等十余类节点）到代码处理
+   （变量、表达式、第三方库）、鉴权机制，循序渐进构建完整知识框架，助你快速上手 n8n 核心功能。​
+4. 前沿高阶应用：深入探索 RAG、向量存储、Chat 模式、MCP 等前沿技术，结合 Human in the loop
+   与异常处理实践，带你突破常规，掌握 n8n 在复杂场景下的高级玩法。​
+5. 自定义开发与实战：手把手教学开发自定义节点，满足个性化需求；通过丰富的案例分析与实践课题，
+   将所学知识转化为实际生产力，真正做到学以致用。
+
+## 适合人群 ​
+
+- 希望提升工作效率，实现业务流程自动化的职场人士 ​
+- 对自动化工作流、低代码开发感兴趣的开发者 ​
+- 计划使用 n8n 搭建复杂集成系统的技术团队成员
 
 ## 目录
-*这里写你的项目目录，已完成的部分用添加上跳转链接*
-- [第1章](https://github.com/datawhalechina/repo-template/blob/main/docs/chapter1/chapter1.md)
-- [第2章](https://github.com/datawhalechina/repo-template/blob/main/docs/chapter2)
-  - [2.1 我是2.1的标题](https://github.com/datawhalechina/repo-template/blob/main/docs/chapter2/chapter2_1.md)
-  - [2.2 我是2.2的标题](https://github.com/datawhalechina/repo-template/blob/main/docs/chapter2/chapter2_2.md)
-- [第3章](https://github.com/datawhalechina/repo-template/blob/main/docs/chapter3)
-  - [3.1 我是3.1的标题](https://github.com/datawhalechina/repo-template/blob/main/docs/chapter3/chapter3_1)
-    - [3.1.1 我是3.1.1的标题](https://github.com/datawhalechina/repo-template/blob/main/docs/chapter3/chapter3_1/chapter3_1_1.md)
-    - [3.1.2 我是3.1.2的标题](https://github.com/datawhalechina/repo-template/blob/main/docs/chapter3/chapter3_1/chapter3_1_2.md)
-  - 3.2 我是3.2的标题
-- 第4章
-  - 4.1 我是4.1的标题
-  - 4.2 我是4.2的标题
 
 ## 贡献者名单
 
-| 姓名 | 职责 | 简介 |
-| :----| :---- | :---- |
-| 小明 | 项目负责人 | 一个理想主义者 |
-| 小红 | 第1章贡献者 | 小明的朋友 |
-| 小强 | 第2章贡献者 | 小明的朋友 |
-
-*注：表头可自定义，但必须在名单中标明项目负责人*
+| 姓名   | 职责       | 简介                                                          |
+| :----- | :--------- | :------------------------------------------------------------ |
+| 王晓亮 | 项目负责人 | [@tomowang](https://github.com/tomowang) 🌐<https://tomo.dev> |
 
 ## 参与贡献
 
-- 如果你发现了一些问题，可以提Issue进行反馈，如果提完没有人回复你可以联系[保姆团队](https://github.com/datawhalechina/DOPMC/blob/main/OP.md)的同学进行反馈跟进~
-- 如果你想参与贡献本项目，可以提Pull request，如果提完没有人回复你可以联系[保姆团队](https://github.com/datawhalechina/DOPMC/blob/main/OP.md)的同学进行反馈跟进~
-- 如果你对 Datawhale 很感兴趣并想要发起一个新的项目，请按照[Datawhale开源项目指南](https://github.com/datawhalechina/DOPMC/blob/main/GUIDE.md)进行操作即可~
+- 如果你发现了一些问题，可以提 Issue 进行反馈，如果提完没有人回复你可以联系[保姆团队](https://github.com/datawhalechina/DOPMC/blob/main/OP.md)的同学进行反馈跟进~
+- 如果你想参与贡献本项目，可以提 Pull request，如果提完没有人回复你可以联系[保姆团队](https://github.com/datawhalechina/DOPMC/blob/main/OP.md)的同学进行反馈跟进~
+- 如果你对 Datawhale 很感兴趣并想要发起一个新的项目，请按照[Datawhale 开源项目指南](https://github.com/datawhalechina/DOPMC/blob/main/GUIDE.md)进行操作即可~
 
 ## 关注我们
 
@@ -47,5 +49,3 @@
 ## LICENSE
 
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="知识共享许可协议" style="border-width:0" src="https://img.shields.io/badge/license-CC%20BY--NC--SA%204.0-lightgrey" /></a><br />本作品采用<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a>进行许可。
-
-*注：默认使用CC 4.0协议，也可根据自身项目情况选用其他协议*
