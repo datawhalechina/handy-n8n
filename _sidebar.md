@@ -1,5 +1,9 @@
 - [C01 - n8n 初识](c01/ "Capter01 n8n 初识")
-- C02 - n8n 安装与配置
+- [C02 - n8n 安装与配置](c02/ "Capter02 n8n 安装与配置")
+    - [官方SaaS](c02/saas.md)
+    - [本地PC部署](c02/local-pc-deploy.md)
+    - [云主机部署](c02/cloud-host-deploy.md)
+    - [HF Space部署](c02/hf-space-deploy.md)
 - C03 - n8n 基本使用
 - C04 - n8n 高阶用法
 - C05 - n8n 节点开发
