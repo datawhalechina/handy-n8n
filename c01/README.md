@@ -55,11 +55,11 @@ n8n 的应用场景非常广泛，几乎可以自动化任何涉及多个应用�
 
 如下是官网提供的新员工入职的工作流示例图：
 
-![n8n workflow - onboard new employee](../images/c01_onboard_new_employee.png)
+![n8n workflow - onboard new employee](images/onboard_new_employee.png)
 
 同时，n8n 官方提供了很多原生的节点，可以满足大部分的自动化需求，
 
-![n8n integrations](../images/c01_n8n_integrations.png)
+![n8n integrations](images/n8n_integrations.png)
 
 官方给相关的节点进行了分类，主要的几个类别如下：
 
