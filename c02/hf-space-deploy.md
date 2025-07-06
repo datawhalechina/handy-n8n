@@ -66,3 +66,33 @@ huggingface space 免费版本提供的服务资源，足够 n8n 服务的运行
    开始使用 n8n
 
    ![hf space deploy done](images/hf_space_deploy_done.png)
+
+需要注意的是，n8n 使用[helmet](https://github.com/helmetjs/helmet)来处理 HTTP 相关的安全
+配置，在生产环境中会默认配置`X-Frame-Options` 为 `sameorigin`，以禁止 iframe 嵌入。所以
+后续可以直接打开上图中展示的地址直接使用。
+
+最后附上原始的 Dockerfile 供参考<https://huggingface.co/spaces/tomowang/n8n/blob/main/Dockerfile>
+
+```Dockerfile
+ARG N8N_VERSION=stable
+
+FROM docker.n8n.io/n8nio/n8n:$N8N_VERSION
+
+LABEL maintainer="Xiaoliang <xiaoliang.zero@gmail.com>"
+
+ENV N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS=true \
+    N8N_RUNNERS_ENABLED=true \
+    N8N_PROXY_HOPS=1
+
+# https://huggingface.co/docs/hub/spaces-sdks-docker#permissions
+# The container runs with user ID 1000.
+# node docker image already has a user named node with ID 1000.
+USER node
+
+VOLUME ["$HOME/.n8n"]
+
+# n8n default port
+EXPOSE 5678
+
+ENTRYPOINT ["tini", "--", "/docker-entrypoint.sh"]
+```
