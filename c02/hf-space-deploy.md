@@ -53,8 +53,8 @@ huggingface space 免费版本提供的服务资源，足够 n8n 服务的运行
    | `DB_POSTGRESDB_HOST`     | 为之前链接信息中的`host`                      |
    | `DB_POSTGRESDB_PORT`     | 6543                                          |
    | `N8N_ENCRYPTION_KEY`     | 随机串，可以使用`openssl rand -base64 32`生成 |
-   | `WEBHOOK_URL`            | 格式为 https://<profile>-n8n.hf.space/        |
-   | `N8N_EDITOR_BASE_URL`    | 格式为 https://<profile>-n8n.hf.space/        |
+   | `WEBHOOK_URL`            | 格式为 `https://<profile>-n8n.hf.space/`      |
+   | `N8N_EDITOR_BASE_URL`    | 格式为 `https://<profile>-n8n.hf.space/`      |
    | `GENERIC_TIMEZONE`       | 按需填写，如 Asia/Shanghai                    |
    | `TZ`                     | 按需填写，如 Asia/Shanghai                    |
 
