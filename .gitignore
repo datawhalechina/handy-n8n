@@ -1,0 +1,13 @@
+# linux
+.Trash-*
+
+# macOS
+.DS_Store
+# Thumbnails
+._*
+
+# Windows thumbnail cache files
+Thumbs.db
+
+# Visual Studio Code
+!.vscode/settings.json
