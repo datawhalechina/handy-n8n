@@ -1,5 +1,17 @@
 (function () {
   const eleReg = /<n8n-workflow src="([^"]+)".*\/>/g;
+
+  function concatenateUrlWithUrlObject(relativePath) {
+    const baseUrl = window.location.href;
+    try {
+      const url = new URL(relativePath, baseUrl);
+      return url.href;
+    } catch (e) {
+      console.error("Invalid URL or relative path:", e);
+      return null; // Or throw an error
+    }
+  }
+
   var n8nPlugin = function (hook, vm) {
     hook.beforeEach(function (content, next) {
       const matches = [...content.matchAll(eleReg)];
@@ -12,7 +24,12 @@
           }, {});
           next(
             content.replace(eleReg, (match, src) => {
-              return `<n8n-demo workflow='${mapping[src]}' frame=true>`;
+              const url = concatenateUrlWithUrlObject(src);
+              if (!url) return match;
+              return (
+                `<n8n-demo workflow='${mapping[src]}' frame=true></n8n-demo>\n` +
+                `> Workflow URL: <${url}>`
+              );
             })
           );
         }

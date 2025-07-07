@@ -1,10 +1,11 @@
 - [C01 - n8n 初识](c01/ "Capter01 n8n 初识")
 - [C02 - n8n 安装与配置](c02/ "Capter02 n8n 安装与配置")
-    - [官方SaaS](c02/saas.md)
-    - [本地PC部署](c02/local-pc-deploy.md)
-    - [云主机部署](c02/cloud-host-deploy.md)
-    - [HF Space部署](c02/hf-space-deploy.md)
-- C03 - n8n 基本使用
+  - [官方 SaaS](c02/saas.md)
+  - [本地 PC 部署](c02/local-pc-deploy.md)
+  - [云主机部署](c02/cloud-host-deploy.md)
+  - [HF Space 部署](c02/hf-space-deploy.md)
+- [C03 - n8n 基本概念](c03/ "Capter03 n8n 基本概念")
+  - [n8n 界面](c03/n8n-workspace.md)
 - C04 - n8n 高阶用法
 - C05 - n8n 节点开发
 - C06 - n8n 案例分享
