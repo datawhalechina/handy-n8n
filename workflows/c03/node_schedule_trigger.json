@@ -1,0 +1,41 @@
+{
+  "name": "schedule trigger",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "hours",
+              "triggerAtMinute": 10
+            },
+            {
+              "field": "cronExpression",
+              "expression": "0 10 * * * *"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        0,
+        0
+      ],
+      "id": "0e8142b5-1855-465a-ac50-2fa72cd63745",
+      "name": "Schedule Trigger"
+    }
+  ],
+  "pinData": {},
+  "connections": {},
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "fba7a657-0988-4e1f-9bc6-bbcb690f0b3b",
+  "meta": {
+    "instanceId": "e503f7c3d190fbe1708ff8f5f0fb5eea84f12e45bbc30706bb7a6b25938597b3"
+  },
+  "id": "N8VtAu5U00dyK4hd",
+  "tags": []
+}

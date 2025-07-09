@@ -1,0 +1,28 @@
+{
+  "name": "manual trigger",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "f2fc7b07-6e52-4298-901d-9ac3c0fce1c4",
+      "name": "When clicking ‘Execute workflow’"
+    }
+  ],
+  "pinData": {},
+  "connections": {},
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "34c49617-c21a-4195-9feb-c4a1ae2a32a1",
+  "meta": {
+    "instanceId": "e503f7c3d190fbe1708ff8f5f0fb5eea84f12e45bbc30706bb7a6b25938597b3"
+  },
+  "id": "N8VtAu5U00dyK4hd",
+  "tags": []
+}
