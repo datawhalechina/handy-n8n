@@ -1,5 +1,5 @@
 (function () {
-  const eleReg = /<n8n-workflow src="([^"]+)".*\/>/g;
+  const eleReg = /<n8n-workflow src=(["'])(.*?)\1.*\/>/g;
 
   function concatenateUrlWithUrlObject(relativePath) {
     const baseUrl = window.location.href;
@@ -15,7 +15,8 @@
   var n8nPlugin = function (hook, vm) {
     hook.beforeEach(function (content, next) {
       const matches = [...content.matchAll(eleReg)];
-      const srcs = [...new Set(matches.map((match) => match[1]))];
+      const srcs = [...new Set(matches.map((match) => match[2]))];
+      console.log(srcs);
       Promise.all(srcs.map((src) => fetch(src).then((res) => res.text()))).then(
         (data) => {
           const mapping = srcs.reduce((acc, src, i) => {
@@ -23,7 +24,7 @@
             return acc;
           }, {});
           next(
-            content.replace(eleReg, (match, src) => {
+            content.replace(eleReg, (match, quote, src) => {
               const url = concatenateUrlWithUrlObject(src);
               if (!url) return match;
               return (
