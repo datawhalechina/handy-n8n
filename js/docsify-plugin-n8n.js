@@ -28,7 +28,7 @@
               const url = concatenateUrlWithUrlObject(src);
               if (!url) return match;
               return (
-                `<n8n-demo workflow='${mapping[src]}' frame=true></n8n-demo>\n` +
+                `<n8n-demo workflow='${mapping[src]}' frame=true theme='light'></n8n-demo>\n` +
                 `> Workflow URL: <${url}>`
               );
             })
