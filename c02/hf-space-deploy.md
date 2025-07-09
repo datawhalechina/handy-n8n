@@ -3,7 +3,7 @@
 云服务部署需要主机，且需要域名，有一定的门槛，最后我们介绍使用 huggingface space 部署 n8n。
 huggingface space 是 huggingface 提供的一个在线服务环境，其支持 docker 部署应用。
 
-## 注册 supabase 账号
+## 通过 supabase 创建数据库
 
 由于 huggingface space 在长时间未使用后，会“进入休眠”状态并停止执行。我们需要使用外部数据库
 来保存 n8n 服务的数据，这里我们使用 supabase 提供的服务。

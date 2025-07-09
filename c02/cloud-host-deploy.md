@@ -126,6 +126,10 @@ withpostgresandworker-postgres-1     postgres:16               "docker-entrypoin
 withpostgresandworker-redis-1        redis:6-alpine            "docker-entrypoint.s…"   redis        5 minutes ago   Up 5 minutes (healthy)   6379/tcp
 ```
 
+> 上述的 docker compose 配置文件中启动了两个 n8n 实例，其中一个是主实例，一个是 worker 实例。
+> 该模式为队列运行模式，使用 redis 作为消息队列。理论上这种模式可以扩展到更多的 worker，进行
+> 分布式部署，提高 n8n 的并发处理能力。详细的描述可以参考官方文档<https://docs.n8n.io/hosting/scaling/queue-mode/>
+
 ## 配置反向代理
 
 编辑域名解析，将域名指向云主机的 IP 地址。这里我们使用 Caddyserver 作为我们的反向代理服务器。
