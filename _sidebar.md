@@ -6,7 +6,7 @@
   - [HF Space 部署](c02/hf-space-deploy.md)
 - [C03 - n8n 基本概念](c03/ "Capter03 n8n 基本概念")
   - [n8n 界面](c03/n8n-workspace.md)
-  - [n8n 节点](c03/n8n-nodes.md)
+  - [n8n 触发器节点](c03/n8n-trigger-nodes.md)
 - C04 - n8n 高阶用法
 - C05 - n8n 节点开发
 - C06 - n8n 案例分享

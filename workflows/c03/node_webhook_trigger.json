@@ -1,0 +1,48 @@
+{
+  "name": "webhook trigger",
+  "nodes": [
+    {
+      "parameters": {
+        "path": "/test/:param1",
+        "options": {
+          "responseData": "{\"code\": 0}",
+          "responseHeaders": {
+            "entries": [
+              {
+                "name": "x-workflow-name",
+                "value": "={{ $workflow.name }}"
+              }
+            ]
+          }
+        }
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        0,
+        0
+      ],
+      "id": "500766c1-0678-4953-9c9d-9b8c1423e1b1",
+      "name": "Webhook",
+      "webhookId": "e59ae7ef-c4bb-4b76-9c8f-4e1e90d9ee11"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook": {
+      "main": [
+        []
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "9d15adb9-1994-4dc9-a231-04a763170dbd",
+  "meta": {
+    "instanceId": "e503f7c3d190fbe1708ff8f5f0fb5eea84f12e45bbc30706bb7a6b25938597b3"
+  },
+  "id": "N8VtAu5U00dyK4hd",
+  "tags": []
+}
