@@ -52,3 +52,5 @@
 输出。
 
 ![n8n workflow test execution](images/n8n_workflow_execution.png)
+
+完成工作流的偏排后，可以通过右上角导航栏中的 Active 按钮来启动工作流。
