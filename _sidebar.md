@@ -1,12 +1,12 @@
 - [C01 - n8n 初识](c01/ "Capter01 n8n 初识")
 - [C02 - n8n 安装与配置](c02/ "Capter02 n8n 安装与配置")
   - [官方 SaaS](c02/saas.md)
-  - [本地 PC 部署](c02/local-pc-deploy.md)
-  - [云主机部署](c02/cloud-host-deploy.md)
-  - [HF Space 部署](c02/hf-space-deploy.md)
+  - [本地 PC 部署](c02/local-pc-deploy?id=本地-pc-部署)
+  - [云主机部署](c02/cloud-host-deploy?id=云主机部署)
+  - [HF Space 部署](c02/hf-space-deploy?id=huggingface-space-部署)
 - [C03 - n8n 基本概念](c03/ "Capter03 n8n 基本概念")
-  - [n8n 界面](c03/n8n-workspace.md)
-  - [n8n 触发器节点](c03/n8n-trigger-nodes.md)
+  - [n8n 平台介绍](c03/n8n-workspace?id=n8n-平台介绍)
+  - [n8n 触发器节点](c03/n8n-trigger-nodes?id=n8n-触发器节点)
 - C04 - n8n 高阶用法
 - C05 - n8n 节点开发
 - C06 - n8n 案例分享
