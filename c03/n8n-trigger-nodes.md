@@ -140,7 +140,17 @@ n8n 为 webhook 触发器生成了一个唯一的 URL 路径，测试 URL 与正
 
 聊天触发器可以视为一种特殊的 webhook 触发器。如果只希望在工作区人工触发，可以设置聊天触发器为
 非公开访问。如果配置允许公开访问，n8n 将生成一个唯一的 URL，用户可以通过该 URL 打开聊天交互
-界面（Hosted Chat 模式，且需要将工作流状态设置为 Active）。
+界面（Hosted Chat 模式）。
+
+> 公开访问的 URL 只能在工作流激活时使用，如果工作流未激活，公开访问的 URL 会返回 404 错误。
+>
+> ```json
+> {
+>   "code": 404,
+>   "message": "The requested webhook \"GET UUID/chat\" is not registered.",
+>   "hint": "The workflow must be active for a production URL to run successfully. You can activate the workflow using the toggle in the top-right of the editor. Note that unlike test URL calls, production URL calls aren't shown on the canvas (only in the executions list)"
+> }
+> ```
 
 聊天触发器配置示例如下：
 
