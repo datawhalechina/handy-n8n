@@ -7,6 +7,7 @@
 - [C03 - n8n 基本概念](c03/ "Capter03 n8n 基本概念")
   - [n8n 平台介绍](c03/n8n-workspace?id=n8n-平台介绍)
   - [n8n 触发器节点](c03/n8n-trigger-nodes?id=n8n-触发器节点)
+  - [n8n 核心节点](c03/n8n-core-nodes?id=n8n-核心节点)
 - C04 - n8n 高阶用法
 - C05 - n8n 节点开发
 - C06 - n8n 案例分享
