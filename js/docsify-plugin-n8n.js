@@ -12,6 +12,15 @@
     }
   }
 
+  function htmlEncode(str) {
+    return str
+      .replace(/&/g, "&amp;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#39;") // Or &apos; but &#39; is more universally supported
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;");
+  }
+
   var n8nPlugin = function (hook, vm) {
     hook.beforeEach(function (content, next) {
       const matches = [...content.matchAll(eleReg)];
@@ -28,7 +37,9 @@
               const url = concatenateUrlWithUrlObject(src);
               if (!url) return match;
               return (
-                `<n8n-demo workflow='${mapping[src]}' frame=true theme='light'></n8n-demo>\n` +
+                `<n8n-demo workflow='${htmlEncode(
+                  mapping[src]
+                )}' frame=true theme='light'></n8n-demo>\n` +
                 `> Workflow URL: <${url}>`
               );
             })
