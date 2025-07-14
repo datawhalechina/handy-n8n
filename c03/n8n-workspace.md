@@ -54,3 +54,42 @@
 ![n8n workflow test execution](images/n8n_workflow_execution.png)
 
 完成工作流的偏排后，可以通过右上角导航栏中的 Active 按钮来启动工作流。
+
+## 数据结构与执行过程
+
+在 n8n 工作流中，节点间使用对象数组来传递数据，其大致结构如下
+
+```json
+[
+  {
+    // For most data:
+    // Wrap each item in another object, with the key 'json'
+    json: {
+      // Example data
+      apple: "beets",
+      carrot: {
+        dill: 1,
+      },
+    },
+    // For binary data:
+    // Wrap each item in another object, with the key 'binary'
+    binary: {
+      // Example data
+      "apple-picture": {
+        data: "....", // Base64 encoded binary data (required)
+        mimeType: "image/png", // Best practice to set if possible (optional)
+        fileExtension: "png", // Best practice to set if possible (optional)
+        fileName: "example.png", // Best practice to set if possible (optional)
+      },
+    },
+  },
+];
+```
+
+`json`字段表示文本相关数据，`binary`字段表示二进制数据，如图片、文件等。其每个数组项可以看作
+数据库表中的一行数据，如下图所示节点输出了 5 条数据
+
+![n8n data items](images/customer_datastore_node.png)
+
+针对每个数据项需要的操作，n8n 会自动进行处理，这意味着大部分场景不需要在工作流程中专门构建循环。
+对于数据或者执行流更复杂的控制，将会在后续章节中做更深入的介绍。
