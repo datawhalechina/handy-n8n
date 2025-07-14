@@ -8,6 +8,7 @@
   - [n8n 平台介绍](c03/n8n-workspace?id=n8n-平台介绍)
   - [n8n 触发器节点](c03/n8n-trigger-nodes?id=n8n-触发器节点)
   - [n8n 核心节点](c03/n8n-core-nodes?id=n8n-核心节点)
+  - [n8n 中的代码](c03/n8n-code?id=n8n-中的代码)
 - C04 - n8n 高阶用法
 - C05 - n8n 节点开发
 - C06 - n8n 案例分享

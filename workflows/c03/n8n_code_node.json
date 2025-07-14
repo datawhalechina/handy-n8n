@@ -1,0 +1,78 @@
+{
+  "name": "code node sample",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        480,
+        240
+      ],
+      "id": "e6cb78ca-24bd-48b4-89eb-0dd279483209",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "jsCode": "const _ = require('lodash');\n\nlet numbers = _.map(\n  _.map(new Array(10), el => _.random(0, 100)), // 10 random numbers\n  number => ({number}) // convert to object\n);\nconsole.log(numbers);\nreturn numbers;\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        720,
+        240
+      ],
+      "id": "86e17803-7c55-4dfc-b075-4b831db04db9",
+      "name": "Code"
+    },
+    {
+      "parameters": {
+        "language": "python",
+        "pythonCode": "import pandas as pd\n\nnumbers = [item['json']['number'] for item in _input.all()]\ndf = pd.DataFrame(numbers, columns=['number'])\naverage_number = df['number'].mean()\ndf['difference_from_average'] = df['number'] - average_number\n\nresult_list = []\nfor idx, row in df.iterrows():\n    item_dict = {\n        \"json\": {\n            \"number\": row['number'],\n            \"difference_from_average\": row['difference_from_average']\n        }\n    }\n    result_list.append(item_dict)\n\nreturn result_list"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        944,
+        240
+      ],
+      "id": "6bad7c47-0a23-4ab9-8105-b62e6bbff656",
+      "name": "Code1"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Code",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code": {
+      "main": [
+        [
+          {
+            "node": "Code1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "a2ae01e3-ebf1-4c5b-aa2f-f70fa45b3eab",
+  "meta": {
+    "instanceId": "e503f7c3d190fbe1708ff8f5f0fb5eea84f12e45bbc30706bb7a6b25938597b3"
+  },
+  "id": "AyV7sdnpt6NtdrjA",
+  "tags": []
+}
