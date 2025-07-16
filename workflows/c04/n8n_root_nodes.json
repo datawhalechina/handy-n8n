@@ -1,0 +1,125 @@
+{
+  "name": "root nodes",
+  "nodes": [
+    {
+      "parameters": {
+        "batching": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.7,
+      "position": [
+        368,
+        -48
+      ],
+      "id": "8fe422ed-7df2-48b8-92a2-bbc9917fdd32",
+      "name": "Basic LLM Chain"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chainSummarization",
+      "typeVersion": 2.1,
+      "position": [
+        1168,
+        -48
+      ],
+      "id": "07ae899b-d3d6-4791-bb88-08382075c326",
+      "name": "Summarization Chain"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chainRetrievalQa",
+      "typeVersion": 1.6,
+      "position": [
+        768,
+        -48
+      ],
+      "id": "693a99a2-f970-421f-ae27-f7fd61cd7f8c",
+      "name": "Question and Answer Chain"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.sentimentAnalysis",
+      "typeVersion": 1.1,
+      "position": [
+        368,
+        160
+      ],
+      "id": "0b587be6-391b-4bf9-8300-e8d0c96d781e",
+      "name": "Sentiment Analysis"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.textClassifier",
+      "typeVersion": 1.1,
+      "position": [
+        768,
+        160
+      ],
+      "id": "eba57917-d843-49cc-9304-8c518fb51015",
+      "name": "Text Classifier"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        64,
+        -48
+      ],
+      "id": "44394f42-ead7-48fc-afcd-519f591c563f",
+      "name": "When chat message received",
+      "webhookId": "b26ea462-0ed4-4fd8-b1bf-a96f3e873319"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.1,
+      "position": [
+        304,
+        448
+      ],
+      "id": "54fb2234-8d6b-4b3f-b824-caeb04b931d3",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "content": "## chain",
+        "height": 464,
+        "width": 1184
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        304,
+        -96
+      ],
+      "id": "322a464c-1824-4a45-951e-0a8018d250e3",
+      "name": "Sticky Note"
+    }
+  ],
+  "pinData": {},
+  "connections": {},
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "6df67131-26cd-4d1b-a83a-7d263dbd846c",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "e503f7c3d190fbe1708ff8f5f0fb5eea84f12e45bbc30706bb7a6b25938597b3"
+  },
+  "id": "usdq9jMTIcWxoxBU",
+  "tags": []
+}
