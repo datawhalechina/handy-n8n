@@ -144,3 +144,66 @@ n8n 中的 RAG 系统通常依赖 vector store 来进行外部数据的存储与
 完整的工作流如下：
 
 <n8n-workflow src='../workflows/c04/n8n_tools.json' />
+
+## MCP
+
+n8n 支持 MCP (Model Context Protocol) 协议，在 n8n 中可以将 MCP 看作一种特殊的工具。
+
+MCP (Model Context Protocol) 是一种开放协议，标准化了应用程序如何为 LLM 提供上下文。
+可以把 MCP 看作是 AI 应用的 USB-C 端口。
+
+![mcp overview](images/mcp-overview.png)
+
+_Source: https://norahsakal.com/blog/mcp-vs-api-model-context-protocol-explained/_
+
+MCP 的通讯主要包括两个部分，一个是作为工具供 AI Agent 调用的 Client，另外是作为服务端的
+Server 提供实际的服务。MCP 协议定义了两种 Client 与 Server 之间的通讯机制：
+
+- [stdio](https://modelcontextprotocol.io/specification/2025-06-18/basic/transports#stdio) - 标准输入和标准输出之间的通信
+- [Streamable HTTP](https://modelcontextprotocol.io/specification/2025-06-18/basic/transports#streamable-http) - 流式 HTTP 请求和响应
+
+n8n 中主要通过 Streamable HTTP 进行通讯，其中 MCP Client 作为 AI Agent 节点的工具，
+MCP Server 为单独的 **MCP Server Trigger** 节点，将 n8n 中集成的工具转成 MCP Server
+服务供 MCP Client 调用。
+
+本节我们使用 GitHub 工具为例，展示 n8n 中 MCP 的使用。
+
+首先我们申请一个 GitHub 的 access token，用于 GitHub API 的调用：
+
+- 访问开发者设置页面 <https://github.com/settings/tokens>
+- 点击右上角的 Generate new token 按钮，选择 classic
+- 在 Note 中输入一个名称，如 n8n-github
+- 出于安全考虑，我们只访问公开的仓库信息，所以不选择任何权限，点击 Generate token 按钮
+- 复制生成的 token，保存到安全的地方
+
+接下来，我们构建一个工作流，将 GitHub API 转成 MCP Server 服务，供 AI Agent 调用。
+
+添加 **MCP Server Trigger** 节点，获取其生产地址，格式类似<https://n8n.example.com/mcp/UUID>
+
+在 **MCP Server Trigger** 工具选项中，选择 **GitHub** 作为工具，打开 **GitHub** 节点的
+配置项，我们选择新建 **Credential**，并输入之前申请的 GitHub access token。
+资源 Resource 选择 **Repository**，操作 Operation 选择 **Get**。**Repository Owner**
+出于测试目的，固定为 `datawhalechina`，**Repository Name** 我们使用 n8n 的
+[**Let the model define this parameter**](https://docs.n8n.io/advanced-ai/examples/using-the-fromai-function/) 功能，
+让 AI Agent 填充参数。具体完整的配置如下
+
+![mcp github config](images/n8n-mcp-github-config.png)
+
+然后我们添加 **On chat message** 节点，并关联 AI Agent 节点，在 AI Agent 节点中的工具选项
+中，选择 **MCP Client**，在弹出的配置窗口中，将之前获取的 MCP Server Trigger 生产地址
+填入 **SSE Endpoint** 配置项。
+
+最终我们保存工作流并将其状态设置为 active。在工作流的聊天测试框，输入问题，可以看到完整的调用
+过程，并得到关于问题中 GitHub 仓库信息的回答，如下所示：
+
+![mcp chat demo](images/n8n-mcp-chat-demo.png)
+
+完整的工作流如下：
+
+<n8n-workflow src='../workflows/c04/n8n_mcp.json' />
+
+## 总结
+
+本节我们介绍了 n8n 中 集群节点、记忆、RAG、Tools 和 MCP 的使用，通过这些功能，我们可以构建
+一个完整的 AI 应用。如果上述的场景不能满足需求，n8n 还提供了[`LangChain Code Node`](https://docs.n8n.io/integrations/builtin/cluster-nodes/root-nodes/n8n-nodes-langchain.code/)，
+可以编写自定义的 LangChain 代码，实现更复杂的 AI 应用。

@@ -1,0 +1,184 @@
+{
+  "name": "mcp",
+  "nodes": [
+    {
+      "parameters": {
+        "public": true,
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "a2fd81c0-5d77-49ef-b11c-df6d88589aab",
+      "name": "When chat message received",
+      "webhookId": "5b117cbd-b95b-40a6-b159-d86316f0a8c4"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.1,
+      "position": [
+        208,
+        0
+      ],
+      "id": "d44ce8df-8e32-49b2-8a27-f3a632d755c3",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        208,
+        224
+      ],
+      "id": "ff075eff-0ec9-4ed7-8ff4-a52116f54f5e",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "ITv27hwZHdVTG9kZ",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sseEndpoint": "https://n8n.tomo.dev/mcp/8f496a39-796b-42c1-817b-da386e913e8a",
+        "authentication": "bearerAuth"
+      },
+      "type": "@n8n/n8n-nodes-langchain.mcpClientTool",
+      "typeVersion": 1,
+      "position": [
+        400,
+        224
+      ],
+      "id": "5c8e667e-8d60-4d8a-88f3-3ab95d6a211e",
+      "name": "MCP Client",
+      "credentials": {
+        "httpBearerAuth": {
+          "id": "h33ronTLAGlqbtgh",
+          "name": "MCP Server Bearer Auth account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "authentication": "bearerAuth",
+        "path": "="
+      },
+      "type": "@n8n/n8n-nodes-langchain.mcpTrigger",
+      "typeVersion": 2,
+      "position": [
+        704,
+        0
+      ],
+      "id": "81472283-adbd-47af-a05a-d2a6608fdc0f",
+      "name": "MCP Server Trigger",
+      "webhookId": "8f496a39-796b-42c1-817b-da386e913e8a",
+      "credentials": {
+        "httpBearerAuth": {
+          "id": "h33ronTLAGlqbtgh",
+          "name": "MCP Server Bearer Auth account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "descriptionType": "manual",
+        "toolDescription": "Get a repository info of datawhalechina in GitHub",
+        "resource": "repository",
+        "operation": "get",
+        "owner": {
+          "__rl": true,
+          "value": "datawhalechina",
+          "mode": "name"
+        },
+        "repository": {
+          "__rl": true,
+          "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Repository_Name', ``, 'string') }}",
+          "mode": "name"
+        }
+      },
+      "type": "n8n-nodes-base.githubTool",
+      "typeVersion": 1.1,
+      "position": [
+        896,
+        208
+      ],
+      "id": "3d5a05bf-565b-4f5d-b828-909cabdd63bb",
+      "name": "Get a repository in GitHub",
+      "webhookId": "459929c7-8801-469b-a4db-2c2f46aeddca",
+      "credentials": {
+        "githubApi": {
+          "id": "BPdPsY19zEdpZgPO",
+          "name": "GitHub account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "MCP Client": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get a repository in GitHub": {
+      "ai_tool": [
+        [
+          {
+            "node": "MCP Server Trigger",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "ba67120d-1680-427a-8607-9778977498d4",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "e503f7c3d190fbe1708ff8f5f0fb5eea84f12e45bbc30706bb7a6b25938597b3"
+  },
+  "id": "huhOj6tnRdI32PBd",
+  "tags": []
+}
