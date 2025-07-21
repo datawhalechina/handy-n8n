@@ -18,13 +18,17 @@
   <body>
     <div id="app"></div>
     <script>
-      window.$docsify = {
+      const docsifyOptions = {
         name: "💻 handy-n8n 🤖",
         repo: "datawhalechina/handy-n8n",
         // logo: "logo.svg",
         loadSidebar: true,
         subMaxLevel: 2,
       };
+      if (location.host === "datawhalechina.github.io") {
+        docsifyOptions.basePath = "/handy-n8n/";
+      }
+      window.$docsify = docsifyOptions;
     </script>
     <!-- Docsify v4 -->
     <script src="//cdn.jsdelivr.net/npm/docsify@4"></script>
