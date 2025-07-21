@@ -117,7 +117,7 @@ HTTP 请求节点支持常见的 HTTP 相关的各项配置项，如请求方法
 
 如上介绍的所有节点可以参考如下的工作流配置
 
-<n8n-workflow src='../workflows/c03/n8n_node_demo.json'/>
+<n8n-workflow src='workflows/c03/n8n_node_demo.json'/>
 
 其完整的执行结果如下
 

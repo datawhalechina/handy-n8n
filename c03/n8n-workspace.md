@@ -31,7 +31,7 @@
 
 我们以下列工作流为示例，导入到 n8n 系统中，展示 n8n 系统的界面和功能。
 
-<n8n-workflow src="../workflows/c03/test.json" />
+<n8n-workflow src='workflows/c03/test.json' />
 
 在 n8n 系统中，点击 **Start from scratch**，介绍两种导入方式：
 

@@ -36,7 +36,7 @@ n8n 支持从一个工作流调用另一个工作流。子工作流可以用于�
 
 完整的示例参考下面的工作流
 
-<n8n-workflow src='../workflows/c04/n8n_sub_workflow.json' />
+<n8n-workflow src='workflows/c04/n8n_sub_workflow.json' />
 
 ## n8n 错误处理
 

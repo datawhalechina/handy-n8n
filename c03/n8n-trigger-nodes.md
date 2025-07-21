@@ -23,7 +23,7 @@ Manual Trigger 节点通常用于测试工作流或者需要手动触发的工�
 添加 Manual Trigger 节点后，点击**Execute workflow**按钮即可触发工作流。Manual Trigger
 节点没有输出，样式如下
 
-<n8n-workflow src='../workflows/c03/node_manual_trigger.json'/>
+<n8n-workflow src='workflows/c03/node_manual_trigger.json'/>
 
 ## Schedule Trigger 定时触发器
 
@@ -64,7 +64,7 @@ n8n，可以通过`GENERIC_TIMEZONE`和`TZ`环境变量来配置时区信息。�
 ]
 ```
 
-<n8n-workflow src='../workflows/c03/node_schedule_trigger.json'/>
+<n8n-workflow src='workflows/c03/node_schedule_trigger.json'/>
 
 ## Webhook Trigger Webhook 触发器
 
@@ -126,7 +126,7 @@ n8n 为 webhook 触发器生成了一个唯一的 URL 路径，测试 URL 与正
 
 具体配置可以参考如下的节点
 
-<n8n-workflow src='../workflows/c03/node_webhook_trigger.json'/>
+<n8n-workflow src='workflows/c03/node_webhook_trigger.json'/>
 
 对于复杂场景，如响应内容需要基于工作流运行情况进行调整，或者需要使用工作流最后节点的输出，
 可以使用**Respond to Webhook**或者**When Last Node Finishes**的响应方式进行定制。
@@ -167,4 +167,4 @@ n8n 为 webhook 触发器生成了一个唯一的 URL 路径，测试 URL 与正
 
 完整的工作流示例如下
 
-<n8n-workflow src='../workflows/c03/node_chat_trigger.json'/>
+<n8n-workflow src='workflows/c03/node_chat_trigger.json'/>

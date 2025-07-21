@@ -110,7 +110,7 @@ return { name: "John" };
 以下是一个使用 Code 节点的示例，包括 JavaScript 及 Python 两个代码节点，外部库的引入，调试
 信息，以及返回数据的处理
 
-<n8n-workflow src='../workflows/c03/n8n_code_node.json' />
+<n8n-workflow src='workflows/c03/n8n_code_node.json' />
 
 另外附上官方文档供参考：
 

@@ -26,7 +26,7 @@ Agent 节点则可以访问更多的工具，以及可以根据用户输入和�
 
 以下是 n8n 中内置的 root node 列表：
 
-<n8n-workflow src='../workflows/c04/n8n_root_nodes.json' />
+<n8n-workflow src='workflows/c04/n8n_root_nodes.json' />
 
 ## Memory 记忆
 
@@ -57,7 +57,7 @@ Agent 节点则可以访问更多的工具，以及可以根据用户输入和�
 
 一个简单的带记忆的工作流如下：
 
-<n8n-workflow src='../workflows/c04/n8n_chat_with_memory.json' />
+<n8n-workflow src='workflows/c04/n8n_chat_with_memory.json' />
 
 ## RAG
 
@@ -126,7 +126,7 @@ n8n 中的 RAG 系统通常依赖 vector store 来进行外部数据的存储与
 
 如下是上述示例的完整的工作流
 
-<n8n-workflow src='../workflows/c04/n8n_rag.json' />
+<n8n-workflow src='workflows/c04/n8n_rag.json' />
 
 官方文档参考<https://docs.n8n.io/advanced-ai/rag-in-n8n/>
 
@@ -143,7 +143,7 @@ n8n 中的 RAG 系统通常依赖 vector store 来进行外部数据的存储与
 
 完整的工作流如下：
 
-<n8n-workflow src='../workflows/c04/n8n_tools.json' />
+<n8n-workflow src='workflows/c04/n8n_tools.json' />
 
 ## MCP
 
@@ -200,7 +200,7 @@ MCP Server 为单独的 **MCP Server Trigger** 节点，将 n8n 中集成的工�
 
 完整的工作流如下：
 
-<n8n-workflow src='../workflows/c04/n8n_mcp.json' />
+<n8n-workflow src='workflows/c04/n8n_mcp.json' />
 
 ## 总结
 
