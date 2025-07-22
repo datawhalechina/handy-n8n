@@ -12,5 +12,5 @@
 - [C04 - n8n 高阶用法](/c04/ "Capter04 n8n 高阶用法")
   - [n8n 子工作流与错误处理](c04/n8n-sub-workflows-and-error-handling)
   - [n8n AI 相关概念](c04/n8n-ai-concepts)
-- C05 - n8n 节点开发
+- [C05 - n8n 社区节点与节点开发](c05/ "Capter05 n8n 社区节点与节点开发")
 - C06 - n8n 案例分享
