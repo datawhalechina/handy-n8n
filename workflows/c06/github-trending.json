@@ -1,0 +1,459 @@
+{
+  "name": "github-trending",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -416,
+        -256
+      ],
+      "id": "b07134c8-89f6-490b-b0ad-f012b5c4dfbb",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "content": "* Specify programming language or leave it empty.\n* Specify top N (default 3)\n* **Specify mail recipient**",
+        "height": 304,
+        "width": 192
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -256,
+        -208
+      ],
+      "id": "320357dd-e58c-4e89-bf66-f7c7138fca27",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "triggerAtHour": 9
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        -416,
+        -48
+      ],
+      "id": "cf9c424d-9045-403e-86ab-0820ad9ad2bd",
+      "name": "Schedule Trigger"
+    },
+    {
+      "parameters": {
+        "url": "=https://api.github.com/repos/{{ $json.name }}/readme",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "githubApi",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Accept",
+              "value": "application/vnd.github.raw+json"
+            },
+            {
+              "name": "X-GitHub-Api-Version",
+              "value": "2022-11-28"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -416,
+        288
+      ],
+      "id": "78190c1a-eed3-464c-b2b2-61d672f5be1f",
+      "name": "GitHub Repo Readme",
+      "credentials": {
+        "githubApi": {
+          "id": "BPdPsY19zEdpZgPO",
+          "name": "GitHub account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "=https://github.com/trending{{ $json.language === \"\" ? \"\" : \"/\" + $json.language }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "User-Agent",
+              "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        192,
+        -48
+      ],
+      "id": "0714dd4a-fe61-421a-afe5-1c96030c1f33",
+      "name": "GitHub Trending"
+    },
+    {
+      "parameters": {
+        "language": "python",
+        "pythonCode": "from bs4 import BeautifulSoup\n\nsoup = BeautifulSoup(_json.data, 'html.parser')\n\nrepositories_data = []\n# Find all articles representing repositories\n# GitHub's trending page uses <article> tags with specific classes\nrepo_articles = soup.find_all(\"article\", class_=\"Box-row\")\n\nfor rank, article in enumerate(repo_articles):\n    # Extract repository name\n    title_tag = article.find(\"h2\", class_=\"h3\")\n    if title_tag and title_tag.a:\n        full_name = title_tag.a.text.strip().replace('\\n', '').replace(' ', '')\n        # Format: \"owner/repo-name\"\n        repo_name_parts = full_name.split('/')\n        if len(repo_name_parts) >= 2:\n            owner = repo_name_parts[0]\n            repo_name = repo_name_parts[1]\n            name = f\"{owner.strip()}/{repo_name.strip()}\"\n        else:\n            name = full_name.strip() # Fallback if format isn't as expected\n    else:\n        continue # Skip if name is not found\n\n    # Extract description\n    description_tag = article.find(\"p\", class_=\"col-9\")\n    description = description_tag.text.strip() if description_tag else ''\n\n    # Extract language\n    language_tag = article.find(\"span\", itemprop=\"programmingLanguage\")\n    language = language_tag.text.strip() if language_tag else ''\n\n    # Extract stars and forks\n    # Look for <a> tags with specific href patterns\n    star_link = article.find(\"a\", href=f\"/{name}/stargazers\")\n    fork_link = article.find(\"a\", href=f\"/{name}/forks\")\n    stars = int(star_link.text.strip().replace(',', '')) if star_link else 0\n    forks = int(fork_link.text.strip().replace(',', '')) if fork_link else 0\n\n    # Extract \"Built by\" contributors (optional)\n    built_by_avatars = []\n    built_by_container = article.find(\"span\", class_=\"d-inline-block mr-3\")\n    if built_by_container:\n        for img_tag in built_by_container.find_all(\"img\", class_=\"avatar-user\"):\n            alt_text = img_tag.get('alt')\n            if alt_text and alt_text.startswith('@'):\n                built_by_avatars.append(alt_text[1:]) # Remove '@' prefix\n\n    today_stars = 0\n    today_stars_tag = article.find(\"span\", class_=\"d-inline-block float-sm-right\")\n    if today_stars_tag:\n        today_stars_text = today_stars_tag.text.strip().split()[0]  # Get the first part of the text\n        if 'k' in today_stars_text:\n            today_stars = int(float(today_stars_text.replace('k', '')) * 1000)\n        else:\n            today_stars = int(today_stars_text.replace(',', ''))\n\n    repo_data = {\n        \"rank\": rank,\n        \"name\": name,\n        \"description\": description,\n        \"language\": language,\n        \"stars\": stars,\n        \"forks\": forks,\n        \"today_stars\": today_stars,\n        \"built_by\": built_by_avatars,\n    }\n    repositories_data.append(repo_data)\n\nreturn repositories_data"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        400,
+        -48
+      ],
+      "id": "f21b06e7-7b07-495c-95aa-c7c55d0f19e0",
+      "name": "Extract Trending List"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=你是一个专业的GitHub项目推荐博主。你的任务是根据提供的GitHub仓库信息和README.md内容，撰写一篇吸引人的每日推送博文，以Markdown格式输出。\n\n博文应包含以下部分：\n1.  **标题**：简洁明了，能吸引读者点击。\n2.  **引言**：简要介绍今天推荐的项目，激发读者的兴趣。\n3.  **项目亮点**：从README.md和仓库信息中提炼出项目的核心价值、主要功能、解决的问题或独特之处。请尝试从技术和应用两个角度进行描述。\n4.  **技术细节/适用场景（可选）**：如果信息允许，可以简要提及项目使用的技术栈或适合的应用场景。\n5.  **如何开始/链接**：引导读者如何进一步了解或使用该项目，并提供GitHub仓库链接。\n6.  **呼吁行动**：鼓励读者探索、贡献或分享。\n\n请注意以下事项：\n* **风格**：专业、友好、引人入胜。避免过于技术化而让非开发者难以理解。\n* **长度**：每篇博文总长度控制在300-500字之间。\n* **多仓库处理**：如果提供了多个仓库，请为每个仓库分别撰写一个独立的博文条目，并最终合并为一个完整博客内容。\n* **信息提取**：优先从`README.md`中提取项目描述、功能和使用指南。从仓库信息中获取星标数、fork数、最近更新时间等元数据以增加博文的丰富性。\n* **创意和洞察**：除了直接引用信息，请尝试对项目进行简要评价或提出你的看法，以增加博文的深度。\n\n格式要求：\n* 仅输出文章内容结果，不要加其他信息\n* 不需要重度的开场白等，如“大家好”等内容\n* 标题使用二级标签\n* 标题使用如下格式示例：`## 每日GitHub项目推荐：Vosk API - 你的离线语音识别利器！`\n\n以下为Github仓库名称 `{{ $('Limit Top N').item.json.name }}`。\n仓库信息：\n```json\n{{ JSON.stringify($('Limit Top N').item.json, null, 2) }}\n```\n\n仓库原始README信息：\n```markdown\n{{ $json.data }}\n```",
+        "batching": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.7,
+      "position": [
+        -208,
+        288
+      ],
+      "id": "28029161-7d6f-4bf1-ba37-5c66281ed332",
+      "name": "GitHub Repo Summarize"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        -208,
+        480
+      ],
+      "id": "a0ff40b7-38fa-41ee-9fe6-36b3d9f5e3c9",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "ITv27hwZHdVTG9kZ",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "return {\n  \"content\": $input.all().map(item => item.json.text).join('\\n\\n')\n}"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        192,
+        288
+      ],
+      "id": "a7e28c63-4ea4-429a-89a5-bf6e2adbaadb",
+      "name": "Merge Markdown"
+    },
+    {
+      "parameters": {
+        "mode": "markdownToHtml",
+        "markdown": "={{ $json.content }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.markdown",
+      "typeVersion": 1,
+      "position": [
+        400,
+        288
+      ],
+      "id": "b9113dba-9441-4896-b813-025f07eb3dd6",
+      "name": "Markdown"
+    },
+    {
+      "parameters": {
+        "fromEmail": "no-reply@tomo.dev",
+        "toEmail": "={{ $('Set Variables').first().json.recipients }}",
+        "subject": "=GitHub Daily Trending #{{ $today.toISODate() }}",
+        "html": "={{ $json.data }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [
+        608,
+        288
+      ],
+      "id": "4e2173f4-5359-48e4-a07c-c88c05a71a80",
+      "name": "Send email",
+      "webhookId": "2c4931a6-0662-448d-939c-d3be882b5d8d",
+      "credentials": {
+        "smtp": {
+          "id": "pSeeNg9Iz9zlfEqN",
+          "name": "SMTP (no-reply@tomo.dev)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "3fc96359-e4d9-4280-b209-1b7aaaffd9a9",
+              "name": "language",
+              "value": "",
+              "type": "string"
+            },
+            {
+              "id": "d41d647d-2eee-4210-b246-f7f47186685a",
+              "name": "topN",
+              "value": 3,
+              "type": "number"
+            },
+            {
+              "id": "22eb48a8-5f2b-40f4-85b7-342ffdc31e66",
+              "name": "recipients",
+              "value": "",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -208,
+        -48
+      ],
+      "id": "c040d611-8b78-4005-a4de-b290f6b884d0",
+      "name": "Set Variables",
+      "notesInFlow": false
+    },
+    {
+      "parameters": {
+        "errorMessage": "Please specify mail recipients"
+      },
+      "type": "n8n-nodes-base.stopAndError",
+      "typeVersion": 1,
+      "position": [
+        192,
+        -240
+      ],
+      "id": "3ef03fe2-1867-4d91-b16f-980d7581d4e0",
+      "name": "Stop and Error"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "8fbbdf83-e290-4974-8f7d-e47ed268a2f7",
+              "leftValue": "={{ $json.recipients }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "empty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        0,
+        -48
+      ],
+      "id": "ccef8f52-3228-44b2-820d-058ea38249b1",
+      "name": "If recipients Empty?"
+    },
+    {
+      "parameters": {
+        "maxItems": "={{ $('Set Variables').item.json.topN }}"
+      },
+      "type": "n8n-nodes-base.limit",
+      "typeVersion": 1,
+      "position": [
+        608,
+        -48
+      ],
+      "id": "ea864cb1-f20d-4644-931a-bb1ee873803e",
+      "name": "Limit Top N"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Set Variables",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "Set Variables",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GitHub Trending": {
+      "main": [
+        [
+          {
+            "node": "Extract Trending List",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract Trending List": {
+      "main": [
+        [
+          {
+            "node": "Limit Top N",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GitHub Repo Readme": {
+      "main": [
+        [
+          {
+            "node": "GitHub Repo Summarize",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "GitHub Repo Summarize",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GitHub Repo Summarize": {
+      "main": [
+        [
+          {
+            "node": "Merge Markdown",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge Markdown": {
+      "main": [
+        [
+          {
+            "node": "Markdown",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Markdown": {
+      "main": [
+        [
+          {
+            "node": "Send email",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set Variables": {
+      "main": [
+        [
+          {
+            "node": "If recipients Empty?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If recipients Empty?": {
+      "main": [
+        [
+          {
+            "node": "Stop and Error",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "GitHub Trending",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Limit Top N": {
+      "main": [
+        [
+          {
+            "node": "GitHub Repo Readme",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "callerPolicy": "workflowsFromSameOwner",
+    "errorWorkflow": "knYWO6K2TJ83te3L"
+  },
+  "versionId": "d7eba448-8323-4914-b680-b10aea2c533d",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "e503f7c3d190fbe1708ff8f5f0fb5eea84f12e45bbc30706bb7a6b25938597b3"
+  },
+  "id": "L791u8q7du3EUAl7",
+  "tags": []
+}

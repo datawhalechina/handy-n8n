@@ -1,0 +1,177 @@
+{
+  "name": "github-issue-notify",
+  "nodes": [
+    {
+      "parameters": {
+        "owner": {
+          "__rl": true,
+          "value": "datawhalechina",
+          "mode": "name"
+        },
+        "repository": {
+          "__rl": true,
+          "value": "handy-n8n",
+          "mode": "list",
+          "cachedResultName": "handy-n8n",
+          "cachedResultUrl": "https://github.com/datawhalechina/handy-n8n"
+        },
+        "events": [
+          "issues"
+        ],
+        "options": {}
+      },
+      "type": "n8n-nodes-base.githubTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "77b7e638-27ea-4891-9a7c-ed91951dbfea",
+      "name": "Github Trigger",
+      "webhookId": "f38f9ca1-dc24-4d6f-9e8a-40946f120549",
+      "credentials": {
+        "githubApi": {
+          "id": "ygxyCt9OZKu1EQik",
+          "name": "GitHub Write Permission"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "7a3b151b-7029-4e5f-a935-9a21d6b6cff5",
+              "name": "feishu_bot_hook",
+              "value": "",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        208,
+        0
+      ],
+      "id": "cbc06277-5257-4e81-8baf-281a7c82ce0d",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $json.feishu_bot_hook }}",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"msg_type\": \"post\",\n  \"content\": {\n    \"post\": {\n      \"zh_cn\": {\n        \"title\": \"GitHub Issue通知\",\n        \"content\": [\n          [\n            {\n              \"tag\": \"a\",\n              \"text\": \"{{ $('Github Trigger').item.json.body.issue.title }}\",\n              \"href\": \"{{ $('Github Trigger').item.json.body.issue.url }}\"\n            },\n            {\n              \"tag\": \"at\",\n              \"user_id\": \"all\"\n            }\n          ]\n        ]\n      }\n    }\n  }\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        688,
+        0
+      ],
+      "id": "a81e7e68-1482-49a4-b456-a88f0d8fa56c",
+      "name": "Feishu Bot"
+    },
+    {
+      "parameters": {
+        "content": "Set feishu bot webhook URL",
+        "height": 272,
+        "width": 224
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        144,
+        -96
+      ],
+      "id": "100031ff-6ce5-43ba-aeb8-34da95313793",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "4e04f339-21e9-4f3a-8493-2f0e1cb23c0c",
+              "leftValue": "={{ $('Github Trigger').item.json.body.action }}",
+              "rightValue": "opened",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        416,
+        0
+      ],
+      "id": "e0409a8b-f48b-421f-8498-168ed9f20ed2",
+      "name": "If"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Github Trigger": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Feishu Bot",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "48da10e9-2354-430c-9f6a-a9c59c8f77d2",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "e503f7c3d190fbe1708ff8f5f0fb5eea84f12e45bbc30706bb7a6b25938597b3"
+  },
+  "id": "1N8QzwzNVL1c7WXn",
+  "tags": []
+}
