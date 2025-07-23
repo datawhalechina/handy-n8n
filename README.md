@@ -19,10 +19,10 @@
 5. 自定义开发与实战：手把手教学开发自定义节点，满足个性化需求；通过丰富的案例分析与实践课题，
    将所学知识转化为实际生产力，真正做到学以致用。
 
-## 适合人群 
+## 适合人群
 
-- 希望提升工作效率，实现业务流程自动化的职场人士 
-- 对自动化工作流、低代码开发感兴趣的开发者 
+- 希望提升工作效率，实现业务流程自动化的职场人士
+- 对自动化工作流、低代码开发感兴趣的开发者
 - 计划使用 n8n 搭建复杂集成系统的技术团队成员
 
 ### 前置要求
@@ -42,6 +42,27 @@ n8n 虽主打低代码、无代码的工作流编排，但若想更好地理解�
 当然，相关的要求，如英语、代码解释等，可以通过翻译工具或者大语言模型，辅助理解。
 
 ## 课程大纲
+
+- [C01 - n8n 初识](https://datawhalechina.github.io/handy-n8n/#/c01/ "Chapter01 n8n 初识")
+  - [n8n 简介](https://datawhalechina.github.io/handy-n8n/#/c01/?id=n8n-%e7%ae%80%e4%bb%8b)
+  - [n8n 与其他工具对比](https://datawhalechina.github.io/handy-n8n/#/c01/?id=n8n-%e4%b8%8e%e5%85%b6%e4%bb%96%e5%b7%a5%e5%85%b7%e7%9a%84%e5%af%b9%e6%af%94)
+- [C02 - n8n 安装与配置](https://datawhalechina.github.io/handy-n8n/#/c02/ "Chapter02 n8n 安装与配置")
+  - [官方 SaaS](https://datawhalechina.github.io/handy-n8n/#/c02/saas)
+  - [本地 PC 部署](https://datawhalechina.github.io/handy-n8n/#/c02/local-pc-deploy?id=%e6%9c%ac%e5%9c%b0-pc-%e9%83%a8%e7%bd%b2)
+  - [云主机部署](https://datawhalechina.github.io/handy-n8n/#/c02/cloud-host-deploy?id=%e4%ba%91%e4%b8%bb%e6%9c%ba%e9%83%a8%e7%bd%b2)
+  - [HF Space 部署](https://datawhalechina.github.io/handy-n8n/#/c02/hf-space-deploy?id=huggingface-space-%e9%83%a8%e7%bd%b2)
+- [C03 - n8n 基本概念](https://datawhalechina.github.io/handy-n8n/#/c03/ "Chapter03 n8n 基本概念")
+  - [n8n 平台介绍](https://datawhalechina.github.io/handy-n8n/#/c03/n8n-workspace?id=n8n-%e5%b9%b3%e5%8f%b0%e4%bb%8b%e7%bb%8d)
+  - [n8n 触发器节点](https://datawhalechina.github.io/handy-n8n/#/c03/n8n-trigger-nodes?id=n8n-%e8%a7%a6%e5%8f%91%e5%99%a8%e8%8a%82%e7%82%b9)
+  - [n8n 核心节点](https://datawhalechina.github.io/handy-n8n/#/c03/n8n-core-nodes?id=n8n-%e6%a0%b8%e5%bf%83%e8%8a%82%e7%82%b9)
+  - [n8n 中的代码](https://datawhalechina.github.io/handy-n8n/#/c03/n8n-code?id=n8n-%e4%b8%ad%e7%9a%84%e4%bb%a3%e7%a0%81)
+- [C04 - n8n 高阶用法](https://datawhalechina.github.io/handy-n8n/#/c04/ "Chapter04 n8n 高阶用法")
+  - [n8n 子工作流与错误处理](https://datawhalechina.github.io/handy-n8n/#/c04/n8n-sub-workflows-and-error-handling)
+  - [n8n AI 相关概念](https://datawhalechina.github.io/handy-n8n/#/c04/n8n-ai-concepts)
+- [C05 - n8n 社区节点与节点开发](https://datawhalechina.github.io/handy-n8n/#/c05/ "Chapter05 n8n 社区节点与节点开发")
+  - [n8n 社区节点](https://datawhalechina.github.io/handy-n8n/#/c05/?id=%e7%a4%be%e5%8c%ba%e8%8a%82%e7%82%b9)
+  - [n8n 节点开发](https://datawhalechina.github.io/handy-n8n/#/c05/?id=%e8%87%aa%e5%ae%9a%e4%b9%89%e8%8a%82%e7%82%b9%e5%bc%80%e5%8f%91)
+- [C06 - n8n 案例分享](https://datawhalechina.github.io/handy-n8n/#/c06/ "Chapter06 n8n 案例分享")
 
 ## 贡献者名单
 
