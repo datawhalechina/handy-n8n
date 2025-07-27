@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -14,6 +14,20 @@
       rel="stylesheet"
       href="//cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css"
     />
+    <!-- Google tag (gtag.js) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-CVLJZ1EVLD"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "G-CVLJZ1EVLD");
+    </script>
   </head>
   <body>
     <div id="app"></div>
@@ -24,7 +38,6 @@
         // logo: "logo.svg",
         loadSidebar: true,
         subMaxLevel: 2,
-        ga: "G-CVLJZ1EVLD",
       };
       if (location.host === "datawhalechina.github.io") {
         docsifyOptions.basePath = "/handy-n8n/";
@@ -33,9 +46,6 @@
     </script>
     <!-- Docsify v4 -->
     <script src="//cdn.jsdelivr.net/npm/docsify@4"></script>
-
-    <!-- google analytics -->
-    <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/ga.min.js"></script>
 
     <!-- language highlight -->
     <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-bash.min.js"></script>
