@@ -53,7 +53,8 @@
 
 ![n8n workflow test execution](images/n8n_workflow_execution.png)
 
-完成工作流的偏排后，可以通过右上角导航栏中的 Active 按钮来启动工作流。
+完成工作流的偏排后，可以通过右上角导航栏中的 **Inactive** 按钮来启动工作流（本示例的工作流
+使用手动触发，所以无需进行 Active 操作）。
 
 ## 数据结构与执行过程
 
