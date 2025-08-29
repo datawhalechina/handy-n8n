@@ -94,7 +94,7 @@ n8n 官方提供两种节点开发方式，一种为 `declarative-style`，即�
 #### 构建节点类
 
 1. 在 `nodes` 目录下创建一个新的目录，命名为 `AMap`，用于存放高德地图的节点。
-2. 在 `AMap` 目录下创建一个 `AMap.node.json` 文件，用于描述节点信息，主体结构如下
+2. 在 `AMap` 目录下创建一个 `AMap.node.js` 文件，用于描述节点信息，主体结构如下
 
 <!-- prettier-ignore-start -->
 ```typescript
